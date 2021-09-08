@@ -1,6 +1,7 @@
-from Constants import HEIGHT, WIDTH
+from Constants import HEIGHT, RECT_X, RECT_Y, WIDTH
 import random
 import pygame
+import math
 
 class Ball:
     def __init__(self,length) -> None:
@@ -9,7 +10,7 @@ class Ball:
         self.y =15
         self.increment = 0
         self.done = False
-    
+        self.fitness = 0
     def generate_genes(self,length:int):
         rep = []
 
@@ -30,8 +31,12 @@ class Ball:
                 self.y += (self.genes[self.increment][1])
             else:
                 self.y += (-1*self.genes[self.increment][1])
+            self.calc_dist()
 
             self.increment +=1
         else:
             self.done = True
-        
+    
+    def calc_dist(self):
+        dist = math.sqrt(math.pow((RECT_X-self.x),2)+math.pow(RECT_Y-self.y,2))
+        self.fitness = 1- (dist/math.sqrt(math.pow((RECT_X-0),2)+math.pow(RECT_Y-0,2)))
