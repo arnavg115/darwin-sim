@@ -11,12 +11,6 @@ class gen:
         self.gen = 1
     def incre(self):
         self.gen = self.gen +1
-class boolwrapper:
-    def __init__(self) -> None:
-        self.boolean = False
-
-BOOLWRAPPER = boolwrapper()
-
 while NUM <5:
     NUM = int(input("How many balls do you want > "))
 
@@ -47,27 +41,21 @@ def from_gen(copyarray):
 def update_display():
     
     WIN.fill((255,255,255))
-    if not BOOLWRAPPER.boolean:
-        pygame.draw.rect(WIN,(0,0,0),pygame.Rect(RECT_X-20,RECT_Y-20,20,20))
-        WIN.blit(FONT.render(f"Average Fitness {str(round(calc_avg(),2))}",False,(0,0,0)),(560,0))
-        WIN.blit(FONT.render(f"Generation {GEN.gen}",False,(0,0,0)),(300,0))
-        for i in BALLARRAY:
-            i.draw(WIN)
-            i.move()
-            
-        if len(BALLARRAY)>0 and BALLARRAY[0].done:
-            copy = BALLARRAY.copy()
-            BALLARRAY.clear()
-            from_gen(copy)
-            time.sleep(1)
-            GEN.incre()
+    pygame.draw.rect(WIN,(0,0,0),pygame.Rect(RECT_X-20,RECT_Y-20,20,20))
+    WIN.blit(FONT.render(f"Average Fitness {str(round(calc_avg(),2))}",False,(0,0,0)),(560,0))
+    WIN.blit(FONT.render(f"Generation {GEN.gen}",False,(0,0,0)),(300,0))
+    for i in BALLARRAY:
+        i.draw(WIN)
+        i.move()
         
+    if len(BALLARRAY)>0 and BALLARRAY[0].done:
+        copy = BALLARRAY.copy()
+        BALLARRAY.clear()
+        from_gen(copy)
+        time.sleep(1)
+        GEN.incre()
         
-    else:
-        WIN.blit(FONT.render(f"DONE",False,(0,0,0)),(450,100))
-        
-    
-    
+
     pygame.display.update()
 
 

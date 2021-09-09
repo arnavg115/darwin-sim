@@ -64,7 +64,7 @@ class Ball:
     def if_dist(self):
         if self.fitness > 0.95:
             print("done")
-
+            time.sleep(2)
             exit()
 
 
