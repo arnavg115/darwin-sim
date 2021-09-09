@@ -15,7 +15,6 @@ class Ball:
         self.increment = 0
         self.done = False
         self.fitness = 0
-        self.reached = False
 
     def generate_genes(self,length:int):
         rep = []
@@ -37,15 +36,18 @@ class Ball:
                 self.y += (self.genes[self.increment][1])
             else:
                 self.y += (-1*self.genes[self.increment][1])
-            self.calc_dist()
-            self.if_dist()
+            self.calc_fitness()
             self.increment +=1
         else:
             self.done = True
     
     def calc_dist(self):
-        dist = math.sqrt(math.pow((RECT_X-self.x),2)+math.pow(RECT_Y-self.y,2))
+        return math.sqrt(math.pow((RECT_X-self.x),2)+math.pow(RECT_Y-self.y,2))
+
+    def calc_fitness(self):
+        dist = self.calc_dist()
         self.fitness = 1- (dist/math.sqrt(math.pow((RECT_X-0),2)+math.pow(RECT_Y-0,2)))
+    
     
     def gen_from_parents(self,ball, ball1):
         res = []
@@ -61,11 +63,4 @@ class Ball:
             
         return res
     
-    def if_dist(self):
-        if self.fitness > 0.95:
-            print("done")
-            time.sleep(2)
-            exit()
-
-
 
