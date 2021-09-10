@@ -1,7 +1,6 @@
 import math
 from random import randint
 
-from Ball import Ball
 import pygame
 import time
 
